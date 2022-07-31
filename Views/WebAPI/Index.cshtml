@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "WebAPI";
+}
+
+<h4>WebAPI</h4>
+<hr />
+<div class="d-flex justify-content-between">
+  
+  <a class="btn btn-primary" href="~/api/students" role="button">API (GET students)</a>
+  <form asp-controller="WebAPI" asp-action="Index" >
+    <p>
+        StudentId: <input type="text" name="StudentId" />
+        <input type="submit" value="GET Student" />
+    </p>
+  </form>
+    
+</div>
