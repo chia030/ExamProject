@@ -2,6 +2,7 @@ using CbsStudents.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using cbsStudents.Areas.Identity.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +13,15 @@ builder.Services.AddDbContext<CbsStudentsContext>(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-.AddDefaultUI()
-.AddEntityFrameworkStores<CbsStudentsContext>();
+builder.Services.AddDefaultIdentity<StudentPortalUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<CbsStudentsContext>();
+
+
+// builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+// .AddDefaultUI()
+// .AddEntityFrameworkStores<CbsStudentsContext>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

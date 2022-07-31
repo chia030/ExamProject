@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-
+using cbsStudents.Areas.Identity.Data;
 namespace cbsStudents.Models.Entities;
 
 public class Post
@@ -24,7 +24,7 @@ public class Post
     public List<Comment> Comments { get; set; }
 
     public string UserId { get; set; }
-    public IdentityUser User { get; set; }
+    public StudentPortalUser User { get; set; }
 
 }
 

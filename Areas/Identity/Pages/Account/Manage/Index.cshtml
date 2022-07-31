@@ -1,0 +1,59 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
+                <label asp-for="Input.FirstName"></label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" />
+                <label asp-for="Input.LastName"></label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Username" class="form-control" disabled />
+                <label asp-for="Username" class="form-label"></label>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+@* <div class="container">
+    <div class="row">
+        <div class="col-6 col-md-2">Firstname</div>
+        <div class="col-md-6 ">Lastname</div>
+        <div class="col-2 col-md-1">Edited</div>
+        <div class="col-1">Status</div>
+        <div class="col-1"></div>
+    </div>
+    @foreach (var user in Model.userManager)
+    {
+        <div class="row grid-row">
+            <div class="col-6 col-md-2">@Html.DisplayFor(x => post.Title)</div>
+            <div class="d-none d-md-block col-md-6">@Html.DisplayFor(x => post.Text)</div>
+            <div class="col-2 col-md-1">@Html.DisplayFor(x => post.Created)</div>
+            <div class="col-1"><span class="badge text-dark">@Html.DisplayFor(x => post.Status)</span></div>
+            <div class="col-1"><a class="btn btn-secondary" asp-action="Edit" asp-route-id="@post.Id">Edit</a></div>
+        </div>
+    }
+</div> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

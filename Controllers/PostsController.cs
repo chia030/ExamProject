@@ -4,6 +4,7 @@ using CbsStudents.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using cbsStudents.Areas.Identity.Data;
 
 namespace cbsStudents.Controllers;
 
@@ -11,9 +12,9 @@ namespace cbsStudents.Controllers;
 public class PostsController : Controller
 {
     private CbsStudentsContext _context;
-    private readonly UserManager<IdentityUser> _userManager;
+    private readonly UserManager<StudentPortalUser> _userManager;
 
-    public PostsController(CbsStudentsContext context, UserManager<IdentityUser> userManager)
+    public PostsController(CbsStudentsContext context, UserManager<StudentPortalUser> userManager)
     {
         _userManager = userManager;
         this._context = context;
@@ -53,7 +54,7 @@ public class PostsController : Controller
         {
             // go ahead and save it into the database
             // redirectToAction()
-            IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+            StudentPortalUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
             post.UserId = user.Id;
 
             post.Created = DateTime.Now;

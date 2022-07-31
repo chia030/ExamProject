@@ -8,15 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using CbsStudents.Data;
 using cbsStudents.Models.Entities;
 using Microsoft.AspNetCore.Identity;
+using cbsStudents.Areas.Identity.Data;
 
 namespace cbsStudents.Controllers
 {
     public class EventsController : Controller
     {
         private readonly CbsStudentsContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<StudentPortalUser> _userManager;
 
-        public EventsController(CbsStudentsContext context, UserManager<IdentityUser> userManager)
+        public EventsController(CbsStudentsContext context, UserManager<StudentPortalUser> userManager)
         {
             _userManager = userManager;
             _context = context;
@@ -65,7 +66,7 @@ namespace cbsStudents.Controllers
         {
             if (ModelState.IsValid)
             {   
-                IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                StudentPortalUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
                 @event.UserId = user.Id;
                 _context.Add(@event);
                 await _context.SaveChangesAsync();
@@ -106,7 +107,7 @@ namespace cbsStudents.Controllers
 
             if (ModelState.IsValid)
             {
-                IdentityUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
+                StudentPortalUser user = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name);
                 @event.UserId = user.Id;
                 try
                 {

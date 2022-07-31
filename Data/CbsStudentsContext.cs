@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using cbsStudents.Models.Entities;
+using cbsStudents.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CbsStudents.Data
 {
-    public class CbsStudentsContext : IdentityDbContext
+    public class CbsStudentsContext : IdentityDbContext<StudentPortalUser, IdentityRole, string>
     {
         public CbsStudentsContext(DbContextOptions<CbsStudentsContext> options)
             : base(options)
@@ -26,6 +28,8 @@ namespace CbsStudents.Data
             this.SeedEvents(builder);
         }
 
+        
+
         public DbSet<Post> Posts { get; set; }
         public DbSet<cbsStudents.Models.Entities.Comment> Comment { get; set; }
         public DbSet<cbsStudents.Models.Entities.Student> Student { get; set; }
@@ -35,27 +39,31 @@ namespace CbsStudents.Data
 
         private void UsersSeed(ModelBuilder builder)
         {
-            var user1 = new IdentityUser
+            var user1 = new StudentPortalUser
             {
                 Id = "1",
+                FirstName = "TestName",
+                LastName = "TestName",
                 Email = "chrk@kea.dk",
                 EmailConfirmed = true,
                 UserName = "chrk@kea.dk",
             };
 
-            var user2 = new IdentityUser
+            var user2 = new StudentPortalUser
             {
                 Id = "2",
+                FirstName = "TestName",
+                LastName = "TestName",
                 Email = "test@kea.dk",
                 EmailConfirmed = true,
                 UserName = "test@kea.dk",
             };
 
-            PasswordHasher<IdentityUser> passHash = new PasswordHasher<IdentityUser>();
+            PasswordHasher<StudentPortalUser> passHash = new PasswordHasher<StudentPortalUser>();
             user1.PasswordHash = passHash.HashPassword(user1, "aA123456!");
             user2.PasswordHash = passHash.HashPassword(user2, "aA123456!");
 
-            builder.Entity<IdentityUser>().HasData(
+            builder.Entity<StudentPortalUser>().HasData(
                 user1, user2
             );
         }
@@ -97,4 +105,14 @@ namespace CbsStudents.Data
         }
 
     }
+
+    public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<StudentPortalUser>
+        {
+            public void Configure(EntityTypeBuilder<StudentPortalUser> builder)
+            {
+                builder.Property(u => u.FirstName).HasMaxLength(255);
+                builder.Property(u => u.LastName).HasMaxLength(255);
+            }
+        }
+        
 }

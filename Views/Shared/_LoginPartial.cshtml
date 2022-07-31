@@ -1,7 +1,8 @@
 @using Microsoft.AspNetCore.Identity
+@using cbsStudents.Areas.Identity.Data;
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<StudentPortalUser> SignInManager
+@inject UserManager<StudentPortalUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
