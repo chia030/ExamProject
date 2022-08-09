@@ -33,7 +33,6 @@ namespace CbsStudents.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<cbsStudents.Models.Entities.Comment> Comment { get; set; }
         public DbSet<cbsStudents.Models.Entities.Student> Student { get; set; }
-
         public DbSet<cbsStudents.Models.Entities.Event> Event { get; set; }
 
 
